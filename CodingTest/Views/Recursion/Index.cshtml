@@ -1,6 +1,26 @@
-﻿
+﻿@using Microsoft.AspNetCore.Html
+@model Location
+
 @{
     ViewData["Title"] = "Index";
+    Func<Location, IHtmlContent> DisplayTree = null;
+    DisplayTree = @<text>
+                      @{
+                          var location = item;
+                          <ul>
+                              <li>
+                                  @location.Name
+                                  @if (location.ChildrenLocations.Any())
+                                  {
+                                      foreach (var child in location.ChildrenLocations)
+                                      {
+                                          @DisplayTree(child)
+                                      }
+                                  }
+                              </li>
+                          </ul>
+                      }
+                   </text>;
 }
 
 <p markdown>
@@ -15,8 +35,12 @@ In this exercise you will take the provided `LocationList` object and display it
             * Location 2.1
             * Location 2.2
 
-Any stylying for the indention is fine (dashes, spaces, pipes, asterisk, etc), whatever you want.
+Any styling for the indention is fine (dashes, spaces, pipes, asterisk, etc), whatever you want.
 
 The only requirement is to use recursion and get the results to display correctly. How you do it is up to you to do as you see fit. 
 If it were me, I'd handle this in the Razor view, but if you have a cooler way to do it, go for it!
-</p>
+</p> 
+
+<div>
+    @DisplayTree(Model)
+</div>

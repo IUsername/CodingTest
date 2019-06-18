@@ -11,10 +11,10 @@ namespace CodingTest.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(LocationList);
         }
 
-        private static Location LocationList = new Location
+        private static readonly Location LocationList = new Location
         {
             Name = "Americas",
             ChildrenLocations = new List<Location>{
