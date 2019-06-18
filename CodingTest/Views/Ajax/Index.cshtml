@@ -10,6 +10,18 @@ The point of this challenge is simple to load the HTML from the `Data` method on
 Feel free to use any method or framework you want to achieve this.
 </p>
 
-<button>Click Here</button>
+<button id="loadBtn">Click Here</button>
 
 <div id="content"></div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#loadBtn").on("click",
+            function() {
+                $.get('@Url.Action("Data")',
+                    function(data) {
+                        $("#content").html(data);
+                    });
+            });
+    </script>
+}
