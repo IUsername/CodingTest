@@ -1,4 +1,5 @@
-﻿
+﻿@model ClassGrades
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,11 +15,25 @@ In this example, use LINQ queries to get the correct data in the `LinqController
 </p>
 
 <h4>Average Grade</h4>
-<p>RESULT HERE</p>
+<p>@Model.AverageGrade.ToString("0.0")%</p>
 
 <h4>List of Grades and Number of Students</h4>
-<p>RESULT HERE</p>
+<p>
+    <ul>
+        @foreach (var (grade, count) in Model.CountsByGradeLetter)
+        {
+            <li>@grade - @count</li>
+        }
+    </ul>
+</p>
 
 <h4>List of Students Ordered By Grades Descending</h4>
-<p>RESULT HERE</p>
+<p>
+    <ul>
+        @foreach (var studentGrade in Model.OrderedStudentGrades)
+        {
+        <li>@studentGrade.NumberGrade% - @studentGrade.FirstName @studentGrade.LastName</li>
+        }
+    </ul>
+</p>
 
